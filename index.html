@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XOX Game - 2 Players ⭕❌</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 20px;
+        }
+
+        .player-info {
+            text-align: center;
+            flex: 1;
+        }
+
+        .player-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .player-symbol {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .player-score {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .player-info.active {
+            background: rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            padding: 1rem;
+            transform: scale(1.05);
+            transition: all 0.3s;
+        }
+
+        .vs {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 0 1rem;
+        }
+
+        .current-turn {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .current-turn .turn-player {
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 2rem;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            background: white;
+            border: 4px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cell:hover:not(.taken) {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .cell.taken {
+            cursor: not-allowed;
+        }
+
+        .cell.x {
+            color: #e74c3c;
+            animation: popIn 0.3s ease-out;
+        }
+
+        .cell.o {
+            color: #3498db;
+            animation: popIn 0.3s ease-out;
+        }
+
+        .cell.winner {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            animation: winner 0.6s ease-in-out;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes winner {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.1) rotate(-5deg);
+            }
+            75% {
+                transform: scale(1.1) rotate(5deg);
+            }
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-reset {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-reset:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-new {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-new:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: scaleIn 0.4s;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .modal-message {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .modal-btn {
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .game-container {
+                padding: 2rem;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .cell {
+                font-size: 3rem;
+            }
+
+            .player-symbol {
+                font-size: 2rem;
+            }
+
+            .game-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .vs {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <div class="title">XOX Game</div>
+        </div>
+
+        <div class="game-info">
+            <div class="player-info" id="player1Info">
+                <div class="player-name">Player 1</div>
+                <div class="player-symbol">❌</div>
+                <div class="player-score"><span id="player1Score">0</span> Wins</div>
+            </div>
+            <div class="vs">VS</div>
+            <div class="player-info" id="player2Info">
+                <div class="player-name">Player 2</div>
+                <div class="player-symbol">⭕</div>
+                <div class="player-score"><span id="player2Score">0</span> Wins</div>
+            </div>
+        </div>
+
+        <div class="current-turn">
+            Turn: <span class="turn-player" id="currentPlayer">Player 1 (❌)</span>
+        </div>
+
+        <div class="board" id="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-reset" onclick="resetGame()">🔄 Reset Game</button>
+            <button class="btn btn-new" onclick="newMatch()">🆕 New Match</button>
+        </div>
+    </div>
+
+    <!-- Winner Modal -->
+    <div class="modal" id="winnerModal">
+        <div class="modal-content">
+            <div class="modal-icon" id="modalIcon">🏆</div>
+            <div class="modal-title" id="modalTitle">Player 1 Wins!</div>
+            <div class="modal-message" id="modalMessage">Congratulations! 🎉</div>
+            <button class="modal-btn" onclick="closeModal()">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPlayer = 'X';
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let gameActive = true;
+        let scores = {
+            X: 0,
+            O: 0
+        };
+
+        const winningConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        const cells = document.querySelectorAll('.cell');
+        const currentPlayerEl = document.getElementById('currentPlayer');
+        const player1Info = document.getElementById('player1Info');
+        const player2Info = document.getElementById('player2Info');
+        const modal = document.getElementById('winnerModal');
+
+        // Initialize game
+        cells.forEach(cell => {
+            cell.addEventListener('click', handleCellClick);
+        });
+
+        updateCurrentPlayer();
+
+        function handleCellClick(e) {
+            const cell = e.target;
+            const index = cell.dataset.index;
+
+            if (board[index] !== '' || !gameActive) return;
+
+            board[index] = currentPlayer;
+            cell.textContent = currentPlayer === 'X' ? '❌' : '⭕';
+            cell.classList.add('taken');
+            cell.classList.add(currentPlayer.toLowerCase());
+
+            if (checkWin()) {
+                gameActive = false;
+                highlightWinner();
+                scores[currentPlayer]++;
+                updateScores();
+                setTimeout(() => showWinnerModal(), 500);
+            } else if (checkDraw()) {
+                gameActive = false;
+                setTimeout(() => showDrawModal(), 500);
+            } else {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                updateCurrentPlayer();
+            }
+        }
+
+        function checkWin() {
+            return winningConditions.some(condition => {
+                return condition.every(index => {
+                    return board[index] === currentPlayer;
+                });
+            });
+        }
+
+        function checkDraw() {
+            return board.every(cell => cell !== '');
+        }
+
+        function highlightWinner() {
+            winningConditions.forEach(condition => {
+                if (condition.every(index => board[index] === currentPlayer)) {
+                    condition.forEach(index => {
+                        cells[index].classList.add('winner');
+                    });
+                }
+            });
+        }
+
+        function updateCurrentPlayer() {
+            if (currentPlayer === 'X') {
+                currentPlayerEl.textContent = 'Player 1 (❌)';
+                player1Info.classList.add('active');
+                player2Info.classList.remove('active');
+            } else {
+                currentPlayerEl.textContent = 'Player 2 (⭕)';
+                player2Info.classList.add('active');
+                player1Info.classList.remove('active');
+            }
+        }
+
+        function updateScores() {
+            document.getElementById('player1Score').textContent = scores.X;
+            document.getElementById('player2Score').textContent = scores.O;
+        }
+
+        function showWinnerModal() {
+            const playerName = currentPlayer === 'X' ? 'Player 1' : 'Player 2';
+            const symbol = currentPlayer === 'X' ? '❌' : '⭕';
+            
+            document.getElementById('modalIcon').textContent = '🏆';
+            document.getElementById('modalTitle').textContent = `${playerName} Wins!`;
+            document.getElementById('modalMessage').textContent = `${symbol} Congratulations! 🎉`;
+            modal.style.display = 'flex';
+        }
+
+        function showDrawModal() {
+            document.getElementById('modalIcon').textContent = '🤝';
+            document.getElementById('modalTitle').textContent = "It's a Draw!";
+            document.getElementById('modalMessage').textContent = 'Good game! Try again! 😊';
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            resetGame();
+        }
+
+        function resetGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            currentPlayer = 'X';
+            
+            cells.forEach(cell => {
+                cell.textContent = '';
+                cell.classList.remove('taken', 'x', 'o', 'winner');
+            });
+            
+            updateCurrentPlayer();
+            modal.style.display = 'none';
+        }
+
+        function newMatch() {
+            resetGame();
+            scores = { X: 0, O: 0 };
+            updateScores();
+        }
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
