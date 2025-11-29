@@ -169,6 +169,7 @@
             border-radius: 8px;
             overflow: hidden;
             position: relative;
+            cursor: pointer; /* Menunjukkan bisa diklik */
         }
 
         .gallery-item img {
@@ -191,6 +192,35 @@
             color: white;
             padding: 10px;
             text-align: center;
+        }
+
+        /* Modal untuk gambar penuh */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         footer {
@@ -322,29 +352,35 @@
         <section id="galeri" class="section">
             <h3>Galeri Kegiatan</h3>
             <div class="gallery">
-                <div class="gallery-item">
+                <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800')">
                     <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400" alt="Kegiatan Kelas">
                     <div class="gallery-caption">Kegiatan Belajar</div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800')">
                     <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400" alt="Lab Komputer">
                     <div class="gallery-caption">Praktikum Lab</div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800')">
                     <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400" alt="Diskusi Kelompok">
                     <div class="gallery-caption">Diskusi Kelompok</div>
                 </div>
-                <div class="gallery-item">
+                <div class="gallery-item" onclick="openModal('https://files.catbox.moe/p7v2c4.jpg')">
                     <img src="https://files.catbox.moe/p7v2c4.jpg" alt="Kegiatan Kelas">
                     <div class="gallery-caption">Momen Kelas</div>
                 </div>
-                <!-- Item baru: Jadwal Pelajaran (digabungkan) -->
-                <div class="gallery-item">
+                <!-- Item baru: Jadwal Pelajaran (digabungkan dan bisa diklik) -->
+                <div class="gallery-item" onclick="openModal('jadwal_pelajaran.jpg')">
                     <img src="jadwal_pelajaran.jpg" alt="Jadwal Pelajaran X TKJ 2">
                     <div class="gallery-caption">Jadwal Pelajaran</div>
                 </div>
             </div>
         </section>
+    </div>
+
+    <!-- Modal untuk gambar penuh -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
     </div>
 
     <footer>
@@ -353,5 +389,25 @@
         <p style="margin-top: 10px;">JL. KH. A. FATAH HASAN NO. 88, Kelurahan Cipare, Kecamatan Serang, Kota Serang, Provinsi Banten</p>
         <p style="margin-top: 15px;">&copy; 2025 X TKJ 2. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        // Fungsi untuk membuka modal
+        function openModal(src) {
+            document.getElementById('myModal').style.display = 'flex';
+            document.getElementById('modalImg').src = src;
+        }
+
+        // Fungsi untuk menutup modal
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        // Tutup modal jika klik di luar gambar
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
