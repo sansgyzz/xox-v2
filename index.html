@@ -194,7 +194,7 @@
             text-align: center;
         }
 
-        /* Modal untuk gambar penuh */
+        /* Modal untuk gambar full screen */
         .modal {
             display: none;
             position: fixed;
@@ -357,7 +357,8 @@
                 <div class="student-card"><strong>35. YUSUF ASTHA FAIRUS</strong></div>
                 <div class="student-card"><strong>36. ZIFARA KAYLA PUTRI</strong></div>
             </div>
-               </section>
+        </section>
+
         <section id="galeri" class="section">
             <h3>Galeri Tkj Two</h3>
             <div class="gallery">
@@ -377,28 +378,39 @@
                
             </div>
         </section>
-           </div>
-           <!-- Modal untuk gambar full screen -->
+    </div>
+
+    <!-- Modal untuk gambar full screen -->
     <div id="myModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="modalImg">
     </div>
+
     <footer>
         <h3>X TKJ 2</h3>
         <p>SMK NEGERI 1 KOTA SERANG</p>
         <p style="margin-top: 10px;">JL. KH. A. FATAH HASAN NO. 88, Kelurahan Cipare, Kecamatan Serang, Kota Serang, Provinsi Banten</p>
+        <p style="margin-top: 15px;">
+            <a href="https://www.instagram.com/x.two.compnetworkengineering?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #3498db; text-decoration: none;">
+                📸 Ikuti Kami di Instagram: @x.two.compnetworkengineering
+
+            </a>
+        </p>
         <p style="margin-top: 15px;">&copy; 2025 X TKJ 2. All Rights Reserved.</p>
     </footer>
+
     <script>
         // Fungsi untuk membuka modal
         function openModal(src) {
             document.getElementById('myModal').style.display = 'flex';
             document.getElementById('modalImg').src = src;
         }
+
         // Fungsi untuk menutup modal
         function closeModal() {
             document.getElementById('myModal').style.display = 'none';
         }
+
         // Tutup modal jika klik di luar gambar
         window.onclick = function(event) {
             if (event.target == document.getElementById('myModal')) {
