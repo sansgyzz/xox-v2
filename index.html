@@ -169,7 +169,7 @@
             border-radius: 8px;
             overflow: hidden;
             position: relative;
-            cursor: pointer; /* Menunjukkan bisa diklik */
+            cursor: pointer;
         }
 
         .gallery-item img {
@@ -194,7 +194,6 @@
             text-align: center;
         }
 
-        /* Modal untuk gambar full screen */
         .modal {
             display: none;
             position: fixed;
@@ -364,9 +363,8 @@
             <div class="gallery">
                 <div class="gallery-item" onclick="openModal('https://files.catbox.moe/i95s1u.jpg')">
                     <img src="https://files.catbox.moe/i95s1u.jpg" alt="Mpls">
-                    <div class="gallery-caption"> Mpls</div>
+                    <div class="gallery-caption">Mpls</div>
                 </div>
-                
                 <div class="gallery-item" onclick="openModal('https://files.catbox.moe/v8dyd3.jpg')">
                     <img src="https://files.catbox.moe/v8dyd3.jpg" alt="Crimping Kabel">
                     <div class="gallery-caption">Crimping Kabel</div>
@@ -375,7 +373,6 @@
                     <img src="https://files.catbox.moe/p7v2c4.jpg" alt="Kegiatan Kelas">
                     <div class="gallery-caption">Jadwal Pelajaran</div>
                 </div>
-               
             </div>
         </section>
     </div>
@@ -386,6 +383,7 @@
         <img class="modal-content" id="modalImg">
     </div>
 
+    <!-- FOOTER BARU DENGAN NAMA & IG PEMBUAT -->
     <footer>
         <h3>X TKJ 2</h3>
         <p>SMK NEGERI 1 KOTA SERANG</p>
@@ -393,25 +391,27 @@
         <p style="margin-top: 15px;">
             <a href="https://www.instagram.com/x.two.compnetworkengineering?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #3498db; text-decoration: none;">
                 📸 Ikuti Kami di Instagram: @x.two.compnetworkengineering
-
             </a>
         </p>
-        <p style="margin-top: 15px;">&copy; 2025 X TKJ 2. All Rights Reserved.</p>
+        <p style="margin-top: 15px; font-size: 0.9em; color: #ccc;">
+            Dibuat oleh: 
+            <a href="https://www.instagram.com/sansgyzz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #3498db; text-decoration: none; font-weight: bold;">
+                MUHAMAD IKHSAN HIBATULLOH
+            </a>
+        </p>
+        <p style="margin-top: 10px;">&copy; 2025 X TKJ 2. All Rights Reserved.</p>
     </footer>
 
     <script>
-        // Fungsi untuk membuka modal
         function openModal(src) {
             document.getElementById('myModal').style.display = 'flex';
             document.getElementById('modalImg').src = src;
         }
 
-        // Fungsi untuk menutup modal
         function closeModal() {
             document.getElementById('myModal').style.display = 'none';
         }
 
-        // Tutup modal jika klik di luar gambar
         window.onclick = function(event) {
             if (event.target == document.getElementById('myModal')) {
                 closeModal();
