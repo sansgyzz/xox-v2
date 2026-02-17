@@ -222,6 +222,167 @@
             cursor: pointer;
         }
 
+        /* ===== KOTAK SARAN ===== */
+        .saran-form {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .saran-desc {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.97em;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 7px;
+            font-size: 0.95em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #dce3ea;
+            border-radius: 7px;
+            font-size: 0.95em;
+            font-family: inherit;
+            color: #333;
+            background: #fafafa;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+            background: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn-kirim {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 13px 35px;
+            border-radius: 7px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-kirim:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-kirim:active {
+            transform: translateY(0);
+        }
+
+        .notif-sukses {
+            display: none;
+            background: #eafaf1;
+            border: 2px solid #2ecc71;
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin-top: 20px;
+            color: #1a7a40;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .saran-list {
+            margin-top: 30px;
+        }
+
+        .saran-list h4 {
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .saran-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #3498db;
+        }
+
+        .saran-item .saran-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .saran-item .saran-nama {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 0.95em;
+        }
+
+        .saran-item .saran-kategori {
+            background: #3498db;
+            color: white;
+            font-size: 0.75em;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .saran-item .saran-waktu {
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        .saran-item .saran-isi {
+            color: #444;
+            font-size: 0.93em;
+            line-height: 1.6;
+        }
+
+        .kosong-saran {
+            text-align: center;
+            color: #aaa;
+            font-style: italic;
+            padding: 20px 0;
+            font-size: 0.95em;
+        }
+
+        /* ===== FOOTER ===== */
         footer {
             background: #2c3e50;
             color: white;
@@ -230,22 +391,55 @@
             margin-top: 40px;
         }
 
+        .footer-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            margin: 15px auto;
+            width: 60%;
+        }
+
+        .wa-channel-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.95em;
+            margin-top: 15px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .wa-channel-btn:hover {
+            background: #1ebe57;
+            transform: scale(1.05);
+        }
+
+        .wa-channel-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
         @media (max-width: 768px) {
             .navbar .container {
                 flex-direction: column;
                 text-align: center;
             }
-
             .navbar nav {
                 margin-top: 15px;
             }
-
             .navbar nav a {
                 margin: 0 10px;
             }
-
             .hero h2 {
                 font-size: 1.8em;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -258,6 +452,7 @@
                 <a href="#profil">Profil</a>
                 <a href="#siswa">Siswa</a>
                 <a href="#galeri">Galeri</a>
+                <a href="#saran">Saran</a>
             </nav>
         </div>
     </div>
@@ -309,7 +504,7 @@
                     <p>Cantika Putri Aulia Lubis</p>
                 </div>
                 <div class="profile-card">
-                    <img src="https://files.catbox.moe/47kqll.jpg" alt="bendahara" class="profile-img">
+                    <img src="https://files.catbox.moe/47kqll.jpg" alt="Bendahara" class="profile-img">
                     <strong>Bendahara</strong>
                     <p>Nasya Abieza Choir</p>
                 </div>
@@ -375,6 +570,50 @@
                 </div>
             </div>
         </section>
+
+        <!-- ===== KOTAK SARAN ===== -->
+        <section id="saran" class="section">
+            <h3>📬 Kotak Saran</h3>
+            <div class="saran-form">
+                <p class="saran-desc">Punya saran, masukan, atau kritik untuk kelas X TKJ 2? Sampaikan di sini! Nama boleh dikosongkan jika ingin anonim. Semua saran akan kami pertimbangkan demi kemajuan kelas bersama. 💪</p>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="inputNama">👤 Nama (opsional)</label>
+                        <input type="text" id="inputNama" placeholder="Nama kamu / biarkan kosong">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputKategori">🏷️ Kategori</label>
+                        <select id="inputKategori">
+                            <option value="Umum">Umum</option>
+                            <option value="Kegiatan Kelas">Kegiatan Kelas</option>
+                            <option value="Kebersihan">Kebersihan</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputSaran">✏️ Saran / Masukan</label>
+                    <textarea id="inputSaran" placeholder="Tulis saran atau masukanmu di sini..."></textarea>
+                </div>
+
+                <button class="btn-kirim" onclick="kirimSaran()">
+                    📨 Kirim Saran
+                </button>
+
+                <div class="notif-sukses" id="notifSukses">
+                    ✅ Saran berhasil terkirim! Terima kasih atas masukanmu 🙏
+                </div>
+
+                <div class="saran-list">
+                    <h4>💬 Saran yang Masuk</h4>
+                    <div id="listSaran">
+                        <p class="kosong-saran">Belum ada saran yang masuk. Jadilah yang pertama! 😊</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- Modal untuk gambar full screen -->
@@ -383,34 +622,97 @@
         <img class="modal-content" id="modalImg">
     </div>
 
-    <!-- FOOTER BARU DENGAN NAMA & IG PEMBUAT -->
+    <!-- FOOTER -->
     <footer>
         <h3>X TKJ 2</h3>
         <p>SMK NEGERI 1 KOTA SERANG</p>
         <p style="margin-top: 10px;">JL. KH. A. FATAH HASAN NO. 88, Kelurahan Cipare, Kecamatan Serang, Kota Serang, Provinsi Banten</p>
-        <p style="margin-top: 15px;">
+
+        <hr class="footer-divider">
+
+        <p>
             <a href="https://www.instagram.com/x.two.compnetworkengineering?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #3498db; text-decoration: none;">
                 📸 Ikuti Kami di Instagram: @x.two.compnetworkengineering
             </a>
-    
+        </p>
+
+       
         </p>
         <p style="margin-top: 10px;">&copy; 2025 X TKJ 2. All Rights Reserved.</p>
     </footer>
 
     <script>
+        /* ===== MODAL GALERI ===== */
         function openModal(src) {
             document.getElementById('myModal').style.display = 'flex';
             document.getElementById('modalImg').src = src;
         }
-
         function closeModal() {
             document.getElementById('myModal').style.display = 'none';
         }
-
         window.onclick = function(event) {
             if (event.target == document.getElementById('myModal')) {
                 closeModal();
             }
+        }
+
+        /* ===== KOTAK SARAN ===== */
+        var daftarSaran = JSON.parse(localStorage.getItem('saranKelas') || '[]');
+        tampilkanSaran();
+
+        function kirimSaran() {
+            var nama = document.getElementById('inputNama').value.trim() || 'Anonim';
+            var kategori = document.getElementById('inputKategori').value;
+            var isi = document.getElementById('inputSaran').value.trim();
+
+            if (!isi) {
+                alert('⚠️ Tolong isi saran terlebih dahulu!');
+                return;
+            }
+
+            var now = new Date();
+            var waktu = now.toLocaleString('id-ID', {
+                day: '2-digit', month: 'long', year: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
+
+            daftarSaran.unshift({ nama: nama, kategori: kategori, isi: isi, waktu: waktu });
+            localStorage.setItem('saranKelas', JSON.stringify(daftarSaran));
+
+            document.getElementById('inputNama').value = '';
+            document.getElementById('inputSaran').value = '';
+            document.getElementById('inputKategori').value = 'Umum';
+
+            var notif = document.getElementById('notifSukses');
+            notif.style.display = 'block';
+            setTimeout(function() { notif.style.display = 'none'; }, 3500);
+
+            tampilkanSaran();
+        }
+
+        function tampilkanSaran() {
+            var container = document.getElementById('listSaran');
+            if (daftarSaran.length === 0) {
+                container.innerHTML = '<p class="kosong-saran">Belum ada saran yang masuk. Jadilah yang pertama! 😊</p>';
+                return;
+            }
+            var html = '';
+            for (var i = 0; i < daftarSaran.length; i++) {
+                var s = daftarSaran[i];
+                html += '<div class="saran-item">' +
+                    '<div class="saran-meta">' +
+                    '<span class="saran-nama">👤 ' + escapeHtml(s.nama) + '</span>' +
+                    '<span class="saran-kategori">' + escapeHtml(s.kategori) + '</span>' +
+                    '</div>' +
+                    '<p class="saran-isi">' + escapeHtml(s.isi) + '</p>' +
+                    '<p class="saran-waktu">🕐 ' + s.waktu + '</p>' +
+                    '</div>';
+            }
+            container.innerHTML = html;
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
         }
     </script>
 </body>
